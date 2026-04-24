@@ -6,8 +6,8 @@
 
 set -e
 
-DOMAIN="gamejam2026.com"
-EMAIL="admin@gamejam2026.com"
+DOMAIN="karadenizgamejam.com"
+EMAIL="admin@karadenizgamejam.com"
 
 echo "🚀 Starting Droplet Provisioning for Karadeniz Game Jam 2026..."
 

@@ -47,10 +47,26 @@ const Participant = {
     `).run([status, id]);
   },
 
-  /** Total participant count. */
+  /** Total participant count (individual only). */
   async count() {
     const db = await getDb();
-    return db.prepare('SELECT COUNT(*) as count FROM participants').get().count;
+    const result = await db.prepare('SELECT COUNT(*) as count FROM participants').get();
+    return parseInt(result.count, 10);
+  },
+
+  /** 
+   * Total people count (Individuals + Team Members).
+   * Used for capacity checks.
+   */
+  async getTotalPeopleCount() {
+    const db = await getDb();
+    const sql = `
+      SELECT 
+        (SELECT COUNT(*) FROM participants) + 
+        (SELECT COALESCE(SUM(member_count), 0) FROM teams) AS total
+    `;
+    const result = await db.prepare(sql).get();
+    return parseInt(result.total, 10);
   },
 
   /** Count participants by status. */

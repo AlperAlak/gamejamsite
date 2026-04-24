@@ -9,7 +9,16 @@ exports.registerIndividual = async (req, res, next) => {
   try {
     const { fullName, email, phone, university, experienceLevel, motivation } = req.body;
 
-    // Check for duplicate email
+    // 1. Capacity Check (Limit: 100)
+    const currentCount = await Participant.getTotalPeopleCount();
+    if (currentCount >= 100) {
+      return res.status(400).json({
+        success: false,
+        message: "Maalesef kontenjanımız dolmuştur. Gösterdiğiniz ilgi için teşekkür ederiz!"
+      });
+    }
+
+    // 2. Check for duplicate email
     const existing = await Participant.findByEmail(email);
     if (existing) {
       return res.status(400).render('pages/register', {
@@ -50,7 +59,16 @@ exports.registerTeam = async (req, res, next) => {
       university, memberNames, memberEmails
     } = req.body;
 
-    // Dupe checks
+    // 1. Capacity Check (Limit: 100)
+    const currentCount = await Participant.getTotalPeopleCount();
+    if (currentCount >= 100) {
+      return res.status(400).json({
+        success: false,
+        message: "Maalesef kontenjanımız dolmuştur. Gösterdiğiniz ilgi için teşekkür ederiz!"
+      });
+    }
+
+    // 2. Dupe checks
     const existingTeam = await Team.findByName(teamName);
     if (existingTeam) {
       return res.status(400).render('pages/register', {
