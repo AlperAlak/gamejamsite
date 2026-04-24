@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <%- include('../partials/navbar') %>
+
+  <!-- Login Section -->
+  <section style="padding-top: calc(var(--nav-height) + var(--space-2xl)); min-height: 80vh; display: flex; align-items: center;">
+    <div class="container" style="max-width: 480px;">
+
+      <div class="section-title">
+        <h2>Giriş Yap</h2>
+        <p class="section-subtitle">Katılımcı paneline erişmek için bilgilerini gir.</p>
+      </div>
+
+      <div class="card card-glow">
+        <form method="POST" action="/auth/login">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+          <div class="form-group">
+            <label for="email" class="form-label">E-posta Adresi</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="ornek@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Şifre</label>
+            <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg pixel-font" style="width: 100%; margin-top: var(--space-md);">
+            🔓 SİSTEME GİRİŞ YAP
+          </button>
+        </form>
+
+        <div style="margin-top: var(--space-xl); text-align: center; border-top: 1px solid var(--border-subtle); padding-top: var(--space-lg);">
+          <p style="color: var(--text-dim); font-size: 0.9rem;">
+            Henüz kaydın yok mu? <a href="/kayit-formu" style="color: var(--mavi-tech); font-weight: 600;">Hemen Kayıt Ol</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include('../partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

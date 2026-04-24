@@ -1,0 +1,43 @@
+{
+  "name": "karadeniz-game-jam-2026",
+  "version": "1.0.0",
+  "description": "Event management platform for Karadeniz Game Jam 2026 — Built with Express.js, EJS, and SQLite",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "game-jam",
+    "karadeniz",
+    "event-management",
+    "express",
+    "nodejs"
+  ],
+  "author": "KTÜ Oyun Geliştirme Kulübü",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-redis": "^7.1.1",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "hpp": "^0.2.3",
+    "i18next": "^23.10.1",
+    "i18next-fs-backend": "^2.3.1",
+    "i18next-http-middleware": "^3.5.0",
+    "pg": "^8.11.3",
+    "rate-limit-redis": "^4.2.0",
+    "redis": "^4.6.13",
+    "nodemailer": "^6.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

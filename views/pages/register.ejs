@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <%- include('../partials/navbar') %>
+
+  <!-- Registration Section -->
+  <section style="padding-top: calc(var(--nav-height) + var(--space-2xl));">
+    <div class="container" style="max-width: 680px;">
+
+      <div class="section-title">
+        <h2>Kayıt Formu</h2>
+        <p class="section-subtitle">Karadeniz Game Jam 2026'ya katılmak için bilgilerini doldur!</p>
+      </div>
+
+      <!-- Error Display -->
+      <% if (errors && errors.length > 0) { %>
+        <div class="alert alert-error">
+          <div>
+            <strong>Lütfen aşağıdaki hataları düzeltin:</strong>
+            <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
+              <% errors.forEach(function(err) { %>
+                <li><%= err.message %></li>
+              <% }); %>
+            </ul>
+          </div>
+        </div>
+      <% } %>
+
+      <% if (registrationOpen) { %>
+
+      <!-- Form Card -->
+      <div class="card card-glow">
+
+        <div style="margin-bottom: var(--space-md); text-align: center;">
+           <h3 style="font-family: 'Orbitron', sans-serif; color: var(--text-main); margin-bottom: 0.5rem;">Kayıt Bilgileri</h3>
+           <p style="color: var(--text-dim); font-size: 0.9rem;">Lütfen aşağıdaki formu eksiksiz doldurunuz.</p>
+        </div>
+
+        <!-- Tab Switcher -->
+        <div class="form-tabs">
+          <button class="form-tab active" id="tab-individual" data-tab="individual">
+            👤 Bireysel Kayıt
+          </button>
+          <button class="form-tab" id="tab-team" data-tab="team">
+            👥 Takım Kaydı
+          </button>
+        </div>
+
+        <!-- ═══ Individual Registration ══════════════════════════════ -->
+        <div class="form-panel active" id="panel-individual">
+          <form method="POST" action="/kayit/bireysel" id="form-individual">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <div class="form-group">
+              <label for="ind-fullname" class="form-label">Ad Soyad *</label>
+              <input type="text" id="ind-fullname" name="fullName" class="form-input"
+                     placeholder="Adınız ve soyadınız"
+                     value="<%= formData.fullName || '' %>"
+                     required minlength="2" maxlength="100">
+            </div>
+
+            <div class="form-group">
+              <label for="ind-email" class="form-label">E-posta Adresi *</label>
+              <input type="email" id="ind-email" name="email" class="form-input"
+                     placeholder="ornek@email.com"
+                     value="<%= formData.email || '' %>"
+                     required>
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="ind-phone" class="form-label">Telefon Numarası *</label>
+              <input type="tel" id="ind-phone" name="phone" class="form-input"
+                     placeholder="05XX XXX XXXX"
+                     value="<%= formData.phone || '' %>"
+                     required>
+            </div>
+
+            <div class="form-group">
+              <label for="ind-university" class="form-label">Üniversite / Okul *</label>
+              <input type="text" id="ind-university" name="university" class="form-input"
+                     placeholder="Karadeniz Teknik Üniversitesi"
+                     value="<%= formData.university || '' %>"
+                     required>
+            </div>
+
+            <div class="form-group">
+              <label for="ind-experience" class="form-label">Deneyim Seviyesi *</label>
+              <select id="ind-experience" name="experienceLevel" class="form-select" required>
+                <option value="" disabled <%= !formData.experienceLevel ? 'selected' : '' %>>Seviyenizi seçin</option>
+                <option value="beginner" <%= formData.experienceLevel === 'beginner' ? 'selected' : '' %>>🌱 Başlangıç — İlk kez katılıyorum</option>
+                <option value="intermediate" <%= formData.experienceLevel === 'intermediate' ? 'selected' : '' %>>⚡ Orta Seviye — Daha önce oyun geliştirdim</option>
+                <option value="advanced" <%= formData.experienceLevel === 'advanced' ? 'selected' : '' %>>🔥 İleri Seviye — Profesyonel/deneyimli</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ind-motivation" class="form-label">Motivasyon (İsteğe Bağlı)</label>
+              <textarea id="ind-motivation" name="motivation" class="form-textarea"
+                        placeholder="Neden katılmak istiyorsun? (max 500 karakter)"
+                        maxlength="500"><%= formData.motivation || '' %></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg pixel-font" style="width: 100%; background: rgba(10,13,16,0.9) !important; color: var(--mavi-tech) !important; border: 1px solid var(--bordo-elite); border-left: 4px solid var(--mavi-tech); box-shadow: inset 0 0 10px rgba(0,65,106,0.3);">
+              🎟️ KAYDIMI TAMAMLA [ENTER]
+            </button>
+          </form>
+        </div>
+
+        <!-- ═══ Team Registration ════════════════════════════════════ -->
+        <div class="form-panel" id="panel-team">
+          <form method="POST" action="/kayit/takim" id="form-team">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <h3 style="margin-bottom: var(--space-lg); font-size: 1rem; color: var(--neon-cyan);">
+              Takım Bilgileri
+            </h3>
+
+            <div class="form-group">
+              <label for="team-name" class="form-label">Takım Adı *</label>
+              <input type="text" id="team-name" name="teamName" class="form-input"
+                     placeholder="Takımınızın adı"
+                     value="<%= formData.teamName || '' %>"
+                     required minlength="2" maxlength="50">
+            </div>
+
+
+
+            <h3 style="margin: var(--space-xl) 0 var(--space-lg); font-size: 1rem; color: var(--neon-cyan);">
+              Kaptan Bilgileri
+            </h3>
+
+            <div class="form-group">
+              <label for="captain-name" class="form-label">Kaptan Ad Soyad *</label>
+              <input type="text" id="captain-name" name="captainName" class="form-input"
+                     placeholder="Kaptan adı ve soyadı"
+                     value="<%= formData.captainName || '' %>"
+                     required minlength="2">
+            </div>
+
+            <div class="form-group">
+              <label for="captain-email" class="form-label">Kaptan E-posta *</label>
+              <input type="email" id="captain-email" name="captainEmail" class="form-input"
+                     placeholder="kaptan@email.com"
+                     value="<%= formData.captainEmail || '' %>"
+                     required>
+            </div>
+
+            <div class="form-group">
+              <label for="captain-phone" class="form-label">Kaptan Telefon *</label>
+              <input type="tel" id="captain-phone" name="captainPhone" class="form-input"
+                     placeholder="05XX XXX XXXX"
+                     value="<%= formData.captainPhone || '' %>"
+                     required>
+            </div>
+
+            <div class="form-group">
+              <label for="team-university" class="form-label">Üniversite / Okul *</label>
+              <input type="text" id="team-university" name="university" class="form-input"
+                     placeholder="Karadeniz Teknik Üniversitesi"
+                     value="<%= formData.university || '' %>"
+                     required>
+            </div>
+
+            <h3 style="margin: var(--space-xl) 0 var(--space-lg); font-size: 1rem; color: var(--neon-cyan);">
+              Takım Üyeleri <span style="font-size: 0.8rem; color: var(--text-muted);">(Kaptan hariç, max 4 kişi)</span>
+            </h3>
+
+            <div id="team-members-container">
+              <!-- Default first member row -->
+              <div class="team-member-row">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label">Üye Adı</label>
+                  <input type="text" name="memberNames" class="form-input" placeholder="Ad Soyad">
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label">Üye E-posta</label>
+                  <input type="email" name="memberEmails" class="form-input" placeholder="email@ornek.com">
+                </div>
+                <button type="button" class="remove-member-btn" aria-label="Üyeyi kaldır">×</button>
+              </div>
+            </div>
+
+            <button type="button" class="add-member-btn" id="add-member-btn">
+              + Üye Ekle
+            </button>
+
+            <div style="margin-top: var(--space-xl);">
+              <button type="submit" class="btn btn-primary btn-lg pixel-font" style="width: 100%; background: rgba(10,13,16,0.9) !important; color: var(--mavi-tech) !important; border: 1px solid var(--bordo-elite); border-left: 4px solid var(--mavi-tech); box-shadow: inset 0 0 10px rgba(0,65,106,0.3);">
+                🎟️ TAKIM KAYDINI TAMAMLA [ENTER]
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <p class="text-center mt-lg" style="font-size: 0.85rem; color: var(--text-muted);">
+        Kayıt olarak <a href="#" style="color: var(--neon-cyan);">gizlilik politikamızı</a> kabul etmiş olursunuz.
+      </p>
+
+      <% } else { %>
+
+      <!-- ═══ KAYITLAR KAPANDI BANNER ═══════════════════════════════ -->
+      <div style="
+        margin-top: var(--space-xl);
+        padding: var(--space-2xl) var(--space-xl);
+        border-radius: 0;
+        text-align: center;
+        background: rgba(10, 13, 16, 0.95);
+        border: 2px solid var(--bordo-elite);
+        box-shadow: 0 0 40px 6px rgba(128, 0, 0, 0.35),
+                    inset 0 0 60px rgba(128, 0, 0, 0.07);
+        position: relative;
+      ">
+        <div style="position: absolute; top: -5px; left: -5px; width: 20px; height: 20px; border-top: 3px solid var(--mavi-tech); border-left: 3px solid var(--mavi-tech);"></div>
+        <div style="position: absolute; bottom: -5px; right: -5px; width: 20px; height: 20px; border-bottom: 3px solid var(--mavi-tech); border-right: 3px solid var(--mavi-tech);"></div>
+        
+        <div style="
+          font-family: 'Orbitron', sans-serif;
+          font-size: clamp(1.8rem, 6vw, 3rem);
+          font-weight: 900;
+          letter-spacing: 0.12em;
+          color: var(--bordo-elite);
+          text-shadow:
+            0 0 12px rgba(128, 0, 0, 0.9),
+            0 0 32px rgba(128, 0, 0, 0.6);
+          animation: closedGlitch 3.5s ease-in-out infinite;
+          margin-bottom: var(--space-md);
+        ">⛔ KAYITLAR KAPANDI</div>
+        <p style="color: var(--text-dim); font-family: 'VT323', monospace; font-size: 1.2rem; max-width: 420px; margin: 0 auto; letter-spacing: 1px;">
+          [ERROR_SYS]: Kayıt süreci şu an kapalıdır. Yeni kayıtlar geçici olarak askıya alınmıştır.
+          Lütfen daha sonra tekrar ziyaret edin.
+        </p>
+      </div>
+
+      <style>
+        @keyframes closedGlitch {
+          0%, 90%, 100% { opacity: 1; text-shadow: 0 0 12px rgba(255,34,68,0.9), 0 0 32px rgba(255,34,68,0.6); }
+          92%            { opacity: 0.7; letter-spacing: 0.18em; }
+          94%            { opacity: 1; letter-spacing: 0.12em; }
+          96%            { opacity: 0.6; letter-spacing: 0.08em; }
+          98%            { opacity: 1; letter-spacing: 0.12em; }
+        }
+      </style>
+
+      <% } %>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include('../partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

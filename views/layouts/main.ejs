@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <!-- ─── Meta Tags ──────────────────────────────────────────────── -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO -->
+  <title><%= title %></title>
+  <meta name="description" content="Karadeniz Game Jam 2026 — 15-17 Ağustos 2026 tarihlerinde Trabzon'da düzenlenecek 48 saatlik oyun geliştirme maratonu. Hemen kayıt ol!">
+  <meta name="keywords" content="game jam, oyun geliştirme, Trabzon, Karadeniz, KTÜ, hackathon, 2026, oyun yarışması">
+  <meta name="author" content="KTÜ Oyun Geliştirme Kulübü">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="48 saatlik oyun geliştirme maratonu — 15-17 Ağustos 2026, Trabzon">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="Karadeniz Game Jam 2026">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= title %>">
+  <meta name="twitter:description" content="48 saatlik oyun geliştirme maratonu — 15-17 Ağustos 2026, Trabzon">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css?v=4.0">
+
+  <!-- Favicon (emoji fallback) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+</head>
+<body>
+  <div class="cyber-grid"></div>
+
+  <!-- ─── Navigation ─────────────────────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="/" class="nav-brand" id="nav-brand" style="font-family: 'Orbitron', sans-serif; display: flex; align-items: center; gap: 10px; letter-spacing: 2px;">
+        <svg width="40" height="24" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 0 5px var(--mavi-tech));">
+          <path d="M12 4H6V10H4V12H6V14H12V12H14V10H12V4Z" fill="var(--mavi-tech)"/>
+          <path d="M34 4H28V10H26V12H28V14H34V12H36V10H34V4Z" fill="var(--bordo-elite)"/>
+          <rect x="16" y="8" width="8" height="4" fill="var(--text-main)" opacity="0.5"/>
+          <path d="M0 2H2V0H38V2H40V22H38V24H2V22H0V2ZM38 22V2H2V22H38Z" fill="var(--text-dim)"/>
+        </svg>
+        <span style="font-weight: 900; color: var(--text-main);">KGJ</span><span style="color: var(--mavi-tech); font-weight: 400;">2026</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/#program" style="font-family: 'Orbitron', sans-serif; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-main);">Takvim</a></li>
+        <li><a href="/#sss" style="font-family: 'Orbitron', sans-serif; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-main);">S.S.S</a></li>
+        <li><a href="/#sponsorlar" style="font-family: 'Orbitron', sans-serif; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-main);">Sponsorlar</a></li>
+      </ul>
+
+
+
+      <a href="/kayit-formu" id="nav-cta" style="font-size: 1.5rem; text-decoration: none; text-shadow: 0 0 10px var(--mavi-tech);">🎟️</a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menüyü aç/kapat">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="/#program">Etkinlik Programı</a>
+      <a href="/#sss">S.S.S</a>
+      <a href="/#sponsorlar">Sponsorlar</a>
+      <a href="/kayit-formu" style="font-size: 1.5rem; text-decoration: none; text-shadow: 0 0 10px var(--mavi-tech);">🎟️</a>
+    </div>
+  </nav>
+
+  <!-- ─── Flash Messages ─────────────────────────────────────────── -->
+  <% if (flashSuccess) { %>
+    <div class="alert alert-success" style="margin-top: calc(var(--nav-height) + var(--space-md)); margin-left: var(--space-lg); margin-right: var(--space-lg);">
+      ✅ <%= flashSuccess %>
+    </div>
+  <% } %>
+  <% if (flashError) { %>
+    <div class="alert alert-error" style="margin-top: calc(var(--nav-height) + var(--space-md)); margin-left: var(--space-lg); margin-right: var(--space-lg);">
+      ❌ <%= flashError %>
+    </div>
+  <% } %>
+
+  <!-- ─── Main Content ───────────────────────────────────────────── -->
+  <main>
+    <%- body %>
+  </main>
+
+  <!-- ─── Footer ─────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="text-gradient">Karadeniz Game Jam</span> © <%= currentYear %>
+        </div>
+        <ul class="footer-links">
+          <li><a href="/#program">Program</a></li>
+          <li><a href="/#sss">S.S.S</a></li>
+          <li><a href="/kayit-formu">Kayıt</a></li>
+        </ul>
+        <p class="footer-copy">KTÜ Oyun Geliştirme Kulübü tarafından düzenlenmektedir.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── Scripts ────────────────────────────────────────────────── -->
+  <script src="/js/main.js"></script>
+</body>
+</html>

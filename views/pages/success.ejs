@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <div class="cyber-grid"></div>
+  <%- include('../partials/navbar') %>
+
+  <div class="success-page">
+    <div>
+      <div class="success-icon">🎉</div>
+      <h1 class="text-gradient">Kayıt Başarılı!</h1>
+      <p style="font-size: 1.1rem; margin-bottom: var(--space-lg);">
+        Karadeniz Game Jam 2026'ya kaydınız başarıyla tamamlandı.
+        <br>Etkinlik detayları e-posta adresinize gönderilecektir.
+      </p>
+
+      <% if (flashSuccess) { %>
+        <div class="alert alert-success" style="max-width: 500px; margin: 0 auto var(--space-xl); justify-content: center;">
+          ✅ <%= flashSuccess %>
+        </div>
+      <% } %>
+
+      <p style="color: var(--text-muted); margin-bottom: var(--space-lg); text-align: center;">
+        WhatsApp topluluğumuza katılarak güncellemelerden haberdar ol!
+      </p>
+
+      <div class="success-actions">
+        <a href="<%= whatsappLink %>" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+          💬 WhatsApp Topluluğuna Katıl
+        </a>
+        <a href="/" class="btn btn-secondary btn-lg">← Ana Sayfaya Dön</a>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

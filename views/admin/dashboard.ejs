@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+</head>
+<body>
+
+  <!-- Admin Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="/admin/dashboard" class="nav-brand"><span>KGJ</span> Admin</a>
+      <div style="display: flex; align-items: center; gap: var(--space-md);">
+        <a href="/" target="_blank" class="btn btn-secondary btn-sm">Siteyi Görüntüle</a>
+        <form method="POST" action="/admin/logout" style="display: inline;">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="btn btn-danger btn-sm">Çıkış Yap</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="admin-layout">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="admin-header">
+        <h1>📊 Yönetici Paneli</h1>
+        <p style="color: var(--text-muted); margin-top: var(--space-sm);">
+          Karadeniz Game Jam 2026 — Kayıt ve proje yönetimi
+        </p>
+      </div>
+
+      <!-- Flash Messages -->
+      <% if (typeof flashSuccess !== 'undefined' && flashSuccess) { %>
+        <div class="alert alert-success mt-md">✅ <%= flashSuccess %></div>
+      <% } %>
+      <% if (typeof flashError !== 'undefined' && flashError) { %>
+        <div class="alert alert-error mt-md">❌ <%= flashError %></div>
+      <% } %>
+
+      <!-- ═══ REGISTRATION KILL SWITCH ══════════════════════════════ -->
+      <div style="
+        margin: var(--space-xl) 0;
+        padding: var(--space-lg) var(--space-xl);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        background: rgba(0,0,0,0.4);
+        border: 2px solid <%= registrationOpen ? 'var(--neon-cyan)' : '#ff2244' %>;
+        box-shadow: 0 0 24px 2px <%= registrationOpen ? 'rgba(0,255,255,0.18)' : 'rgba(255,34,68,0.28)' %>,
+                    inset 0 0 40px rgba(0,0,0,0.3);
+        transition: border-color 0.4s, box-shadow 0.4s;
+      " id="kill-switch-panel">
+
+        <!-- Left: Status Info -->
+        <div style="display: flex; align-items: center; gap: var(--space-md);">
+          <!-- Animated indicator dot -->
+          <div style="
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: <%= registrationOpen ? 'var(--neon-cyan)' : '#ff2244' %>;
+            box-shadow: 0 0 10px 4px <%= registrationOpen ? 'rgba(0,255,255,0.6)' : 'rgba(255,34,68,0.7)' %>;
+            animation: killSwitchPulse 1.6s ease-in-out infinite;
+          "></div>
+
+          <div>
+            <div style="
+              font-family: var(--font-display);
+              font-size: 1rem;
+              font-weight: 700;
+              letter-spacing: 0.05em;
+              color: <%= registrationOpen ? 'var(--neon-cyan)' : '#ff4466' %>;
+              text-transform: uppercase;
+            ">
+              Kayıt Sistemi: <%= registrationOpen ? 'AÇI K' : 'KAPALI' %>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">
+              <% if (registrationOpen) { %>
+                Yeni kayıtlar kabul ediliyor. Kapatmak için butona basın.
+              <% } else { %>
+                Yeni kayıtlar engelleniyor. Açmak için butona basın.
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Toggle Form (pure HTML — no JavaScript) -->
+        <form action="/admin/toggle-registration" method="POST" style="margin: 0;">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <% if (registrationOpen) { %>
+            <button type="submit" class="btn-kill-switch kill-switch--close">🔴 Kayıtları Kapat</button>
+          <% } else { %>
+            <button type="submit" class="btn-kill-switch kill-switch--open">🟢 Kayıtları Aç</button>
+          <% } %>
+        </form>
+      </div>
+
+      <style>
+        @keyframes killSwitchPulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50%       { opacity: 0.55; transform: scale(0.88); }
+        }
+        /* Kill-switch button — base */
+        .btn-kill-switch {
+          font-family: var(--font-display);
+          font-size: 0.85rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          padding: 0.65rem 1.6rem;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background 0.25s, box-shadow 0.25s, transform 0.15s;
+        }
+        /* State: registration is OPEN → button offers to CLOSE (red) */
+        .kill-switch--close {
+          border: 2px solid #ff2244;
+          background: rgba(255,34,68,0.12);
+          color: #ff4466;
+        }
+        .kill-switch--close:hover {
+          background: rgba(255,34,68,0.25);
+          transform: scale(1.03);
+        }
+        /* State: registration is CLOSED → button offers to OPEN (cyan) */
+        .kill-switch--open {
+          border: 2px solid var(--neon-cyan);
+          background: rgba(0,255,255,0.1);
+          color: var(--neon-cyan);
+        }
+        .kill-switch--open:hover {
+          background: rgba(0,255,255,0.2);
+          transform: scale(1.03);
+        }
+      </style>
+
+      <!-- Stats Cards -->
+      <div class="admin-stats">
+        <div class="card admin-stat-card">
+          <div class="stat-value"><%= stats.totalParticipants %></div>
+          <div class="stat-label">Toplam Katılımcı</div>
+        </div>
+        <div class="card admin-stat-card">
+          <div class="stat-value"><%= stats.totalTeams %></div>
+          <div class="stat-label">Toplam Takım</div>
+        </div>
+        <div class="card admin-stat-card pending">
+          <div class="stat-value"><%= stats.pendingParticipants + stats.pendingTeams %></div>
+          <div class="stat-label">Bekleyen Kayıt</div>
+        </div>
+        <div class="card admin-stat-card approved">
+          <div class="stat-value"><%= stats.approvedParticipants + stats.approvedTeams %></div>
+          <div class="stat-label">Onaylanan</div>
+        </div>
+      </div>
+
+      <!-- ═══ PARTICIPANTS TABLE ═════════════════════════════════════ -->
+      <div class="table-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); flex-wrap: wrap; gap: var(--space-md);">
+          <h2>👤 Bireysel Katılımcılar (<%= participants.length %>)</h2>
+          <div style="display: flex; gap: var(--space-sm); align-items: center;">
+            <input type="text" id="admin-search" placeholder="🔍 İsim, e-posta, durum ara..." style="padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: rgba(0,0,0,0.5); color: var(--text-primary); font-family: var(--font-body); width: 250px;">
+            <a href="/admin/export-csv" class="btn btn-secondary btn-sm" style="border-color: var(--neon-cyan); color: var(--neon-cyan);">📥 CSV İndir</a>
+          </div>
+        </div>
+
+        <% if (participants.length === 0) { %>
+          <div class="card">
+            <div class="empty-state">
+              <div class="empty-state-icon">📭</div>
+              <p>Henüz bireysel kayıt bulunmuyor.</p>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Ad Soyad</th>
+                  <th>E-posta</th>
+                  <th>Telefon</th>
+                  <th>Üniversite</th>
+                  <th>Seviye</th>
+                  <th>Durum</th>
+                  <th>Tarih</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% participants.forEach(function(p) { %>
+                  <tr>
+                    <td><%= p.id %></td>
+                    <td style="color: var(--text-primary); font-weight: 500;"><%= p.full_name %></td>
+                    <td><%= p.email %></td>
+                    <td><%= p.phone %></td>
+                    <td><%= p.university %></td>
+                    <td>
+                      <% if (p.experience_level === 'beginner') { %>🌱 Başlangıç
+                      <% } else if (p.experience_level === 'intermediate') { %>⚡ Orta
+                      <% } else { %>🔥 İleri<% } %>
+                    </td>
+                    <td>
+                      <span class="badge badge-<%= p.status %>">
+                        <%= p.status === 'pending' ? 'Bekliyor' : p.status === 'approved' ? 'Onaylı' : 'Reddedildi' %>
+                      </span>
+                    </td>
+                    <td><%= p.created_at %></td>
+                    <td>
+                      <div class="action-btns">
+                        <% if (p.status !== 'approved') { %>
+                          <form method="POST" action="/admin/participants/<%= p.id %>/approve">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="btn btn-success btn-sm">✓</button>
+                          </form>
+                        <% } %>
+                        <% if (p.status !== 'rejected') { %>
+                          <form method="POST" action="/admin/participants/<%= p.id %>/reject">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="btn btn-danger btn-sm">✕</button>
+                          </form>
+                        <% } %>
+                      </div>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- ═══ TEAMS TABLE ════════════════════════════════════════════ -->
+      <div class="table-section">
+        <h2>👥 Takımlar (<%= teams.length %>)</h2>
+
+        <% if (teams.length === 0) { %>
+          <div class="card">
+            <div class="empty-state">
+              <div class="empty-state-icon">📭</div>
+              <p>Henüz takım kaydı bulunmuyor.</p>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Takım Adı</th>
+                  <th>Kaptan</th>
+                  <th>E-posta</th>
+                  <th>Telefon</th>
+                  <th>Üniversite</th>
+                  <th>Üye</th>
+                  <th>Durum</th>
+                  <th>Tarih</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% teams.forEach(function(t) { %>
+                  <tr>
+                    <td><%= t.id %></td>
+                    <td style="color: var(--neon-cyan); font-weight: 600;"><%= t.team_name %></td>
+                    <td style="color: var(--text-primary);"><%= t.captain_name %></td>
+                    <td><%= t.captain_email %></td>
+                    <td><%= t.captain_phone %></td>
+                    <td><%= t.university %></td>
+                    <td style="text-align: center;"><%= t.member_count %></td>
+                    <td>
+                      <span class="badge badge-<%= t.status %>">
+                        <%= t.status === 'pending' ? 'Bekliyor' : t.status === 'approved' ? 'Onaylı' : 'Reddedildi' %>
+                      </span>
+                    </td>
+                    <td><%= t.created_at %></td>
+                    <td>
+                      <div class="action-btns">
+                        <% if (t.status !== 'approved') { %>
+                          <form method="POST" action="/admin/teams/<%= t.id %>/approve">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="btn btn-success btn-sm">✓</button>
+                          </form>
+                        <% } %>
+                        <% if (t.status !== 'rejected') { %>
+                          <form method="POST" action="/admin/teams/<%= t.id %>/reject">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="btn btn-danger btn-sm">✕</button>
+                          </form>
+                        <% } %>
+                      </div>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- ═══ SUBMISSIONS TABLE ══════════════════════════════════════ -->
+      <div class="table-section">
+        <h2>🎮 Proje Teslimleri (<%= submissions.length %>)</h2>
+
+        <% if (submissions.length === 0) { %>
+          <div class="card">
+            <div class="empty-state">
+              <div class="empty-state-icon">🎮</div>
+              <p>Henüz proje teslimi bulunmuyor.</p>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Oyun Adı</th>
+                  <th>Takım / Katılımcı</th>
+                  <th>Oyun Linki</th>
+                  <th>Kaynak Kod</th>
+                  <th>Durum</th>
+                  <th>Tarih</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% submissions.forEach(function(s) { %>
+                  <tr>
+                    <td><%= s.id %></td>
+                    <td style="color: var(--text-primary); font-weight: 500;"><%= s.title %></td>
+                    <td><%= s.team_name || s.participant_name || '—' %></td>
+                    <td><a href="<%= s.game_url %>" target="_blank">🔗 Oyun</a></td>
+                    <td>
+                      <% if (s.source_url) { %>
+                        <a href="<%= s.source_url %>" target="_blank">📂 Kaynak</a>
+                      <% } else { %>—<% } %>
+                    </td>
+                    <td>
+                      <span class="badge badge-<%= s.status %>">
+                        <%= s.status === 'pending' ? 'Bekliyor' : s.status === 'approved' ? 'Onaylı' : 'Reddedildi' %>
+                      </span>
+                    </td>
+                    <td><%= s.created_at %></td>
+                    <td>
+                      <div class="action-btns">
+                        <% if (s.status !== 'approved') { %>
+                          <form method="POST" action="/admin/submissions/<%= s.id %>/approve">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="btn btn-success btn-sm">✓</button>
+                          </form>
+                        <% } %>
+                        <% if (s.status !== 'rejected') { %>
+                          <form method="POST" action="/admin/submissions/<%= s.id %>/reject">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="btn btn-danger btn-sm">✕</button>
+                          </form>
+                        <% } %>
+                      </div>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- ═══ SPONSOR YÖNETİMİ ══════════════════════════════════════ -->
+      <div class="table-section" id="sponsors">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); flex-wrap: wrap; gap: var(--space-md);">
+          <h2>🏢 Sponsor Yönetimi (<%= sponsors.length %>)</h2>
+        </div>
+
+        <!-- Add Sponsor Form -->
+        <div class="card" style="margin-bottom: var(--space-lg); padding: var(--space-lg); border: 1px solid var(--border-glow); background: rgba(0,255,255,0.03);">
+          <h3 style="margin-bottom: var(--space-md); font-size: 1rem; color: var(--neon-cyan);">➕ Yeni Sponsor Ekle</h3>
+          <form method="POST" action="/admin/sponsors" style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: var(--space-md); align-items: end;">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-size:0.78rem;">Sponsor Adı *</label>
+              <input type="text" name="name" class="form-input" placeholder="KTÜ Teknokent" required>
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-size:0.78rem;">Logo URL *</label>
+              <input type="url" name="logo_url" class="form-input" placeholder="https://..." required>
+            </div>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-size:0.78rem;">Web Sitesi (İsteğe Bağlı)</label>
+              <input type="url" name="website_url" class="form-input" placeholder="https://...">
+            </div>
+            <div class="form-group" style="margin: 0; min-width: 160px;">
+              <label class="form-label" style="font-size:0.78rem;">Kategori</label>
+              <select name="category" class="form-select">
+                <option value="main">⭐ Ana Sponsor</option>
+                <option value="extra">🔹 Ekstra Sponsor</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm" style="white-space: nowrap; border-color: var(--neon-cyan); color: var(--neon-cyan); background: rgba(0,255,255,0.1);">
+              Ekle
+            </button>
+          </form>
+        </div>
+
+        <!-- Sponsors Table -->
+        <% if (sponsors.length === 0) { %>
+          <div class="card">
+            <div class="empty-state">
+              <div class="empty-state-icon">🏢</div>
+              <p>Henüz sponsor eklenmemiş.</p>
+            </div>
+          </div>
+        <% } else { %>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Logo</th>
+                  <th>Sponsor Adı</th>
+                  <th>Web Sitesi</th>
+                  <th>Kategori</th>
+                  <th>Eklenme</th>
+                  <th>İşlem</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% sponsors.forEach(function(sp) { %>
+                  <tr>
+                    <td><%= sp.id %></td>
+                    <td>
+                      <img src="<%= sp.logo_url %>" alt="<%= sp.name %>"
+                           style="height:36px; max-width:80px; object-fit:contain; background:#fff; border-radius:4px; padding:2px 6px;">
+                    </td>
+                    <td style="font-weight: 600; color: var(--text-primary);">
+                      <% if (sp.website_url) { %>
+                        <a href="<%= sp.website_url %>" target="_blank" style="color: var(--neon-cyan);"><%= sp.name %></a>
+                      <% } else { %>
+                        <%= sp.name %>
+                      <% } %>
+                    </td>
+                    <td style="font-size:0.8rem; color: var(--text-muted);">
+                      <%= sp.website_url || '—' %>
+                    </td>
+                    <td>
+                      <% if (sp.category === 'main') { %>
+                        <span class="badge" style="background: rgba(0,255,255,0.15); color: var(--neon-cyan); border: 1px solid rgba(0,255,255,0.3);">⭐ Ana Sponsor</span>
+                      <% } else { %>
+                        <span class="badge" style="background: rgba(180,100,255,0.15); color: #c87eff; border: 1px solid rgba(180,100,255,0.3);">🔹 Ekstra</span>
+                      <% } %>
+                    </td>
+                    <td style="font-size:0.8rem;"><%= sp.created_at %></td>
+                    <td>
+                      <form method="POST" action="/admin/sponsors/<%= sp.id %>/delete">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button type="submit" class="btn btn-danger btn-sm">🗑</button>
+                      </form>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand"><span class="text-gradient">KGJ Admin</span> © <%= currentYear %></div>
+        <p class="footer-copy">Yönetici paneli — yalnızca yetkili erişim.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+  <script>
+    // Live Search Logic
+    document.getElementById('admin-search').addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('.data-table tbody tr').forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(term) ? '' : 'none';
+      });
+    });
+
+    // Toast Notification System
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3500);
+    }
+
+    // Convert existing alerts to toasts
+    document.querySelectorAll('.alert').forEach(alert => {
+      const isError = alert.classList.contains('alert-error');
+      const text = alert.textContent.replace('✅', '').replace('❌', '').trim();
+      showToast(text, isError ? 'error' : 'success');
+      alert.style.display = 'none';
+    });
+
+    // (Kill-switch uses a pure HTML form — no JS needed)
+  </script>
+</body>
+</html>

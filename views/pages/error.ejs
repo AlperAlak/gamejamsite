@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <div class="cyber-grid"></div>
+  <%- include('../partials/navbar') %>
+
+  <div class="error-page">
+    <div>
+      <div class="error-code"><%= statusCode %></div>
+      <h2 style="margin-bottom: var(--space-md);"><%= title %></h2>
+      <p><%= message %></p>
+      <a href="/" class="btn btn-primary btn-lg">← Ana Sayfaya Dön</a>
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>

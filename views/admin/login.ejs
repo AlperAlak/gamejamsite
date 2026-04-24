@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+
+  <div class="admin-login">
+    <div class="card card-glow admin-login-card">
+      <h1>
+        <span class="text-gradient">🔐 Yönetici Girişi</span>
+      </h1>
+
+      <% if (error) { %>
+        <div class="alert alert-error">
+          ❌ <%= error %>
+        </div>
+        <% } %>
+
+          <form method="POST" action="/admin/login" id="admin-login-form">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <div class="form-group">
+              <label for="admin-password" class="form-label">Yönetici Şifresi</label>
+              <input type="password" id="admin-password" name="password" class="form-input"
+                placeholder="Şifrenizi girin" required autofocus>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+              Giriş Yap →
+            </button>
+          </form>
+
+          <p class="text-center mt-lg" style="font-size: 0.8rem; color: var(--text-muted);">
+            <a href="/" style="color: var(--text-muted);">← Ana Sayfaya Dön</a>
+          </p>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script>
+    // Show Toast
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3500);
+    }
+
+    // Convert server errors to toasts
+    const errorAlert = document.querySelector('.alert-error');
+    if (errorAlert) {
+      showToast(errorAlert.textContent.replace('❌', '').trim(), 'error');
+      errorAlert.remove();
+    }
+
+    // Form Loading State
+    document.getElementById('admin-login-form').addEventListener('submit', function () {
+      const btn = this.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Yükleniyor...';
+      }
+    });
+  </script>
+</body>
+
+</html>

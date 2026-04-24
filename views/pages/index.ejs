@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <div class="cyber-grid"></div>
+  <div class="glow-overlay"></div>
+  <%- include('../partials/navbar') %>
+
+  <section class="hero fade-in-section" id="hero">
+    <div class="container hero-container">
+      <div class="hero-header">
+        <h1 class="hero-title">
+          <span class="title-top">KARADENİZ</span>
+          <span class="title-bottom">GAME JAM 2026</span>
+        </h1>
+        
+        <div class="hero-meta">
+          <div class="meta-chip">
+            <span class="chip-icon">📍</span>
+            <span class="chip-text">Akçaabat Kültür Merkezi</span>
+          </div>
+          <div class="meta-chip chip-magenta">
+            <span class="chip-icon">📅</span>
+            <span class="chip-text">15–16–17 Mayıs</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="hero-description">
+        48 saat boyunca hayal gücünü konuştur, takımınla birlikte sıfırdan bir oyun geliştir ve ödüller kazan. 
+        Deneyim seviyesi fark etmez — herkes davetli.
+      </p>
+
+
+
+      <div class="hero-countdown">
+        <div class="countdown-grid" id="countdown" data-target="2026-05-15T15:30:00+03:00">
+          <div class="countdown-card">
+            <span class="card-number" id="countdown-days">00</span>
+            <span class="card-label">GÜN</span>
+          </div>
+          <div class="countdown-card">
+            <span class="card-number" id="countdown-hours">00</span>
+            <span class="card-label">SAAT</span>
+          </div>
+          <div class="countdown-card">
+            <span class="card-number" id="countdown-minutes">00</span>
+            <span class="card-label">DAKİKA</span>
+          </div>
+          <div class="countdown-card">
+            <span class="card-number" id="countdown-seconds">00</span>
+            <span class="card-label">SANİYE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Buttons + OAuth -->
+      <% if (registrationOpen) { %>
+      <div class="hero-actions">
+        <a href="/kayit-formu" class="btn-premium primary">
+          <span class="btn-icon">🎟️</span>
+          <span class="btn-text">Kayıt Ol</span>
+        </a>
+        <a href="#" class="btn-premium secondary">
+          <span class="btn-icon">📄</span>
+          <span class="btn-text">Katılımcı Rehberi</span>
+        </a>
+      </div>
+      <style>
+        .btn-scan::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+          transform: skewX(-25deg);
+          animation: btnScan 3s infinite;
+        }
+      </style>
+
+      <!-- OAuth Social Logins REMOVED -->
+
+      <% } else { %>
+
+      <!-- KAYITLAR KAPANDI — shown on hero when closed -->
+      <div style="margin-top: var(--space-xl); display: flex; flex-direction: column; align-items: center; gap: var(--space-md);">
+        <div style="
+          font-family: var(--font-display);
+          font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+          font-weight: 900;
+          letter-spacing: 0.14em;
+          color: #ff2244;
+          text-shadow: 0 0 16px rgba(255,34,68,0.85), 0 0 40px rgba(255,34,68,0.45);
+          animation: heroClosedPulse 2s ease-in-out infinite;
+          text-align: center;
+        ">⛔ KAYITLAR KAPANDI</div>
+        <a href="#program" class="btn btn-secondary btn-lg">📋 Programı Gör</a>
+      </div>
+
+      <style>
+        @keyframes heroClosedPulse {
+          0%, 100% { text-shadow: 0 0 16px rgba(255,34,68,0.85), 0 0 40px rgba(255,34,68,0.45); }
+          50%       { text-shadow: 0 0 28px rgba(255,34,68,1),    0 0 60px rgba(255,34,68,0.7); }
+        }
+      </style>
+
+      <% } %>
+
+      <!-- Presented By -->
+      <div class="hero-presented">
+        <p>Düzenleyen</p>
+        <img src="/images/club-logo.png" alt="KTÜ Oyun Geliştirme Kulübü"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <p style="display:none; font-size: 0.9rem; color: var(--neon-cyan); font-family: var(--font-display);">
+          KTÜ Oyun Geliştirme Kulübü
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SPONSOR MARQUEE (Above-the-fold) ═════════════════════════ -->
+  <div class="sponsor-marquee-section" id="sponsorlar">
+    <p class="marquee-label">✦ Sponsorlarımız & Destekçilerimiz ✦</p>
+    <div class="marquee-track">
+      <!-- Group 1 (original) -->
+      <div class="marquee-group">
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Alpha</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Beta</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Gamma</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Delta</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Epsilon</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Zeta</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Eta</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Theta</span>
+        </div>
+      </div>
+      <!-- Group 2 (duplicate for seamless loop) -->
+      <div class="marquee-group">
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Alpha</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Beta</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Gamma</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Delta</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Epsilon</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Zeta</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Eta</span>
+        </div>
+        <div class="marquee-item">
+          <span class="sponsor-text">◆ Sponsor Theta</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GAME JAM NEDİR? (Terminal Card) ══════════════════════════ -->
+  <section class="terminal-section" id="nedir">
+    <div class="container">
+      <div class="terminal-card fade-in">
+
+        <!-- Terminal Header (macOS-style dots) -->
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="terminal-title">kgj-2026://bilgi/game-jam-nedir</span>
+        </div>
+
+        <!-- Terminal Body -->
+        <div class="terminal-body">
+          <h2>
+            <span class="prompt">▶</span>
+            Game Jam Nedir?
+          </h2>
+
+          <p class="terminal-text">
+            Game Jam, belirli bir süre içinde — genellikle <strong>24 ile 72 saat</strong> arasında —
+            sıfırdan bir oyun geliştirme maratondur. Katılımcılar bireysel veya takım halinde çalışarak,
+            verilen <em>tema</em> doğrultusunda oyunlarını tasarlar, kodlar, sanatını yapar ve sunar.
+            <span class="terminal-cursor"></span>
+          </p>
+
+          <p class="terminal-text">
+            Karadeniz Game Jam 2026'da seni <strong>48 saat</strong> boyunca sürecek yaratıcı bir macera bekliyor.
+            Deneyim seviyesi fark etmez — <em>herkes davetli!</em> Amaç kazanmak olduğu kadar, öğrenmek,
+            network kurmak ve eğlenmektir.
+          </p>
+
+          <!-- Feature Chips -->
+          <div class="terminal-features">
+            <div class="terminal-feature">
+              <span class="terminal-feature-icon">⚡</span>
+              <div>
+                <h4>48 Saat Süre</h4>
+                <p>Cuma sabahı başla, Pazar akşamı teslim et. Tam bir sprint deneyimi!</p>
+              </div>
+            </div>
+            <div class="terminal-feature">
+              <span class="terminal-feature-icon">🎨</span>
+              <div>
+                <h4>Her Yetenek Geçerli</h4>
+                <p>Kodlama, sanat, müzik, hikâye yazarlığı — tüm beceriler bir oyunda birleşir.</p>
+              </div>
+            </div>
+            <div class="terminal-feature">
+              <span class="terminal-feature-icon">🤝</span>
+              <div>
+                <h4>Takım Çalışması</h4>
+                <p>2-5 kişilik takımlar kur veya etkinlik günü yeni insanlarla tanış.</p>
+              </div>
+            </div>
+            <div class="terminal-feature">
+              <span class="terminal-feature-icon">🏆</span>
+              <div>
+                <h4>Ödüller & Sertifika</h4>
+                <p>Kategorilerde ödüller, tüm katılımcılara katılım sertifikası.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Status Bar -->
+        <div class="terminal-status">
+          <span class="status-dot"></span>
+          Sistem aktif — Kayıtlar açık — Kalan kontenjan güncelleniyor...
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ÖDÜLLER (Prize Pool) ═════════════════════════════════════ -->
+  <section class="prizes-section fade-in-section" id="oduller">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2 class="glitch-text">Ödüller</h2>
+        <p class="section-subtitle">Kazananları bekleyen harika ödüller ve özel kategoriler</p>
+      </div>
+
+      <!-- Main Prize Tiers -->
+      <div class="prize-grid fade-in">
+        <!-- 2nd Place -->
+        <div class="prize-card prize-silver">
+          <div class="prize-icon">🥈</div>
+          <div class="prize-rank">2.lik Ödülü</div>
+          <div class="prize-reward">50.000 ₺</div>
+          <p class="prize-desc">Yüksek performans gösteren ve harika bir deneyim sunan projeye.</p>
+        </div>
+
+        <!-- 1st Place (Center, Largest) -->
+        <div class="prize-card prize-gold" style="transform: scale(1.05); z-index: 10;">
+          <div class="prize-icon">🏆</div>
+          <div class="prize-rank">1.lik Ödülü</div>
+          <div class="prize-reward">100.000 ₺</div>
+          <p class="prize-desc">Temayı en yenilikçi şekilde yorumlayan ve kusursuz çalışan projeye.</p>
+        </div>
+
+        <!-- 3rd Place -->
+        <div class="prize-card prize-bronze">
+          <div class="prize-icon">🥉</div>
+          <div class="prize-rank">3.lük Ödülü</div>
+          <div class="prize-reward">25.000 ₺</div>
+          <p class="prize-desc">Yaratıcı yaklaşımıyla dikkat çeken yarışmacı projeye.</p>
+        </div>
+      </div>
+
+      <!-- Special Categories -->
+      <div class="special-prizes fade-in">
+        <h3 class="special-prizes-title">Özel Ödüller</h3>
+        <div class="special-prizes-grid">
+          <div class="special-prize-card">
+            <h4>🧠 En İyi Kod Mimarisi</h4>
+            <p>Performanslı mekanikler ve temiz sistem tasarımı.</p>
+            <span class="special-prize-reward">10.000 ₺</span>
+          </div>
+          <div class="special-prize-card">
+            <h4>📖 En İyi Senaryo ve Hikaye</h4>
+            <p>Sürükleyici naratif ve oyuna başarılı entegrayon.</p>
+            <span class="special-prize-reward">10.000 ₺</span>
+          </div>
+          <div class="special-prize-card">
+            <h4>🎨 En İyi Görsel Sanat</h4>
+            <p>Özgün art style ve harika atmosfer uyumu.</p>
+            <span class="special-prize-reward">10.000 ₺</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CRYPTOGRAPHIC THEME TEASER ═══════════════════════════════ -->
+  <section class="theme-teaser-section" id="tema">
+    <div class="container">
+      <div class="theme-teaser-card fade-in" id="theme-teaser">
+
+        <!-- Header -->
+        <div class="theme-teaser-header">
+          <div class="theme-teaser-header-left">
+            <span class="lock-icon">🔒</span>
+            <span class="theme-teaser-header-title">Etkinlik Teması</span>
+          </div>
+          <span class="classification">Sınıflandırılmış</span>
+        </div>
+
+        <!-- Body -->
+        <div class="theme-teaser-body">
+          <p class="theme-teaser-label">Tema Açılış Tarihine Kadar Kilitli</p>
+
+          <!-- The scrambling text display -->
+          <div class="theme-encrypted-display" id="theme-display" data-text="@#$%&*!?">
+            ██ ŞİFRELENDİ ██
+          </div>
+
+          <!-- Fake decryption progress bar -->
+          <div class="theme-progress-bar">
+            <div class="theme-progress-track">
+              <div class="theme-progress-fill" id="theme-progress"></div>
+            </div>
+            <div class="theme-progress-label">
+              <span>Şifre Çözülüyor...</span>
+              <span id="theme-progress-pct">0%</span>
+            </div>
+          </div>
+
+          <p class="theme-teaser-hint">
+            Tema <strong>15 Ağustos, 10:00</strong>'da açılış töreninde duyurulacaktır.
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="theme-teaser-footer">
+          <span class="neon-pulse"></span>
+          Dosya bütünlüğü doğrulandı — SHA-256: e3b0c44298fc1c14...
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS BAR ════════════════════════════════════════════════ -->
+  <div class="stats-bar fade-in">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value">
+            <%= participantCount + teamCount * 3 %>+
+          </div>
+          <div class="stat-label">Katılımcı</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">48</div>
+          <div class="stat-label">Saat</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">🏆</div>
+          <div class="stat-label">Ödül Havuzu</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Eğlence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MENTOR & JÜRİ (Data Grid) ═══════════════════════════════ -->
+  <section class="mentor-section" id="mentor-juri">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Uzman Kadromuz</h2>
+        <p class="section-subtitle">Seni yönlendirecek mentorlar ve projeleri değerlendirecek jüri üyeleri</p>
+      </div>
+
+      <!-- Mentors Sub-Section -->
+      <div class="fade-in" style="max-width: 1000px; margin: 0 auto;">
+        <div class="mentor-sub-header">
+          ⚡ Mentor Kadrosu
+        </div>
+        <div class="mentor-grid">
+
+          <div class="mentor-card">
+            <div class="mentor-avatar">👨‍💻</div>
+            <div class="mentor-info">
+              <div class="mentor-name">Ahmet Yılmaz</div>
+              <span class="mentor-role mentor">Mentor</span>
+              <p class="mentor-expertise">10+ yıl oyun geliştirme deneyimi. Unity ve Unreal Engine uzmanı.</p>
+              <div class="mentor-tags">
+                <span class="mentor-tag">Unity</span>
+                <span class="mentor-tag">C#</span>
+                <span class="mentor-tag">Game Design</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mentor-card">
+            <div class="mentor-avatar">👩‍🎨</div>
+            <div class="mentor-info">
+              <div class="mentor-name">Elif Kara</div>
+              <span class="mentor-role mentor">Mentor</span>
+              <p class="mentor-expertise">Pixel art ve 2D animasyon konusunda uzman. Indie oyun sanatçısı.</p>
+              <div class="mentor-tags">
+                <span class="mentor-tag">Pixel Art</span>
+                <span class="mentor-tag">Aseprite</span>
+                <span class="mentor-tag">2D Animasyon</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mentor-card">
+            <div class="mentor-avatar">🧑‍🔬</div>
+            <div class="mentor-info">
+              <div class="mentor-name">Can Demir</div>
+              <span class="mentor-role mentor">Mentor</span>
+              <p class="mentor-expertise">Oyun mekaniği ve seviye tasarımı uzmanı. GDC konuşmacısı.</p>
+              <div class="mentor-tags">
+                <span class="mentor-tag">Godot</span>
+                <span class="mentor-tag">Level Design</span>
+                <span class="mentor-tag">GDScript</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Jury Sub-Section -->
+        <div class="mentor-sub-header" style="margin-top: var(--space-2xl); border-left: 4px solid var(--mavi-sky); background: rgba(0, 191, 255, 0.05); color: var(--mavi-sky);">
+          🏆 Jüri Üyeleri
+        </div>
+        <div class="mentor-grid">
+
+          <div class="mentor-card">
+            <div class="mentor-avatar">👩‍⚖️</div>
+            <div class="mentor-info">
+              <div class="mentor-name">Prof. Dr. Ayşe Çelik</div>
+              <span class="mentor-role jury">Jüri</span>
+              <p class="mentor-expertise">KTÜ Bilgisayar Mühendisliği. Yapay zeka ve oyun algoritmları araştırmacısı.
+              </p>
+              <div class="mentor-tags">
+                <span class="mentor-tag">AI</span>
+                <span class="mentor-tag">Algoritmalar</span>
+                <span class="mentor-tag">Akademi</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mentor-card">
+            <div class="mentor-avatar">👨‍🚀</div>
+            <div class="mentor-info">
+              <div class="mentor-name">Murat Özkan</div>
+              <span class="mentor-role jury">Jüri</span>
+              <p class="mentor-expertise">Bağımsız oyun stüdyosu kurucusu. 15+ yıl sektör deneyimi.</p>
+              <div class="mentor-tags">
+                <span class="mentor-tag">Indie Dev</span>
+                <span class="mentor-tag">İş Geliştirme</span>
+                <span class="mentor-tag">Publishing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mentor-card">
+            <div class="mentor-avatar">👩‍🎤</div>
+            <div class="mentor-info">
+              <div class="mentor-name">Zeynep Arslan</div>
+              <span class="mentor-role jury">Jüri</span>
+              <p class="mentor-expertise">Oyun müziği ve ses tasarımı uzmanı. Uluslararası ödüllü besteci.</p>
+              <div class="mentor-tags">
+                <span class="mentor-tag">Ses Tasarımı</span>
+                <span class="mentor-tag">FMOD</span>
+                <span class="mentor-tag">Müzik</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ETKINLIK PROGRAMI (Schedule) ═════════════════════════════ -->
+  <section id="program" style="background: var(--bg-surface);">
+
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2 class="glitch-text">Etkinlik Programı</h2>
+        <p class="section-subtitle">48 saatlik yolculuğun adımları</p>
+      </div>
+
+      <style>
+        .timeline-wrapper {
+          position: relative;
+          max-width: 700px;
+          margin: var(--space-2xl) auto;
+        }
+
+        .timeline-line {
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: linear-gradient(to bottom, var(--bordo-elite), var(--mavi-tech));
+          box-shadow: 0 0 10px rgba(0, 65, 106, 0.5);
+          z-index: 1;
+        }
+
+        .timeline-content {
+          margin-left: 80px; /* SHIFT: This guarantees no overlap */
+        }
+
+        .timeline-day-header {
+          font-family: 'Orbitron', var(--font-display);
+          font-size: 2rem;
+          font-weight: 800;
+          color: var(--mavi-neon);
+          text-shadow: 0 0 15px rgba(0, 65, 106, 0.6);
+          margin-top: var(--space-3xl);
+          margin-bottom: var(--space-md);
+          padding-bottom: 10px;
+          border-bottom: 1px solid rgba(0, 65, 106, 0.2);
+          text-transform: uppercase;
+          letter-spacing: -1px;
+          cursor: default;
+        }
+
+        .timeline-day-header:hover {
+          animation: glitch 0.3s infinite;
+          text-shadow: 2px 0 var(--bordo-elite), -2px 0 var(--mavi-tech);
+        }
+
+        .schedule-item {
+          position: relative;
+          background: rgba(10, 13, 16, 0.85); /* Dark black translucent */
+          backdrop-filter: blur(15px);
+          padding: 20px 25px;
+          margin-bottom: var(--space-md);
+          border-radius: 6px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border: 1px solid rgba(0, 65, 106, 0.4); /* Thin Mavi border */
+          z-index: 2;
+          overflow: hidden;
+        }
+
+        .schedule-item::after {
+          content: "";
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          border: 1px solid transparent;
+          border-image: linear-gradient(90deg, var(--bordo-elite), var(--mavi-tech), var(--bordo-elite)) 1;
+          opacity: 0;
+          transition: opacity 0.3s;
+          pointer-events: none;
+        }
+
+        .schedule-item:hover {
+          transform: translateX(10px) scale(1.02);
+          border-color: transparent;
+          box-shadow: 0 0 25px rgba(128, 0, 0, 0.3); /* Bordo glow on hover */
+        }
+
+        .schedule-item:hover::after {
+          opacity: 1;
+          animation: borderFlow 3s linear infinite;
+        }
+
+        .timeline-title {
+          margin: 0;
+          color: var(--text-main);
+          font-size: 1.1rem;
+          font-family: var(--font-body);
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .timeline-badge {
+          background: transparent;
+          color: var(--mavi-neon);
+          padding: 6px 14px;
+          border-radius: 4px;
+          font-weight: 700;
+          font-family: var(--font-body);
+          letter-spacing: 1px;
+          border: 1px solid var(--mavi-neon);
+          box-shadow: 0 0 5px rgba(0, 65, 106, 0.2);
+          font-size: 0.9rem;
+        }
+
+        .cyber-icon {
+          font-size: 1.4rem;
+          opacity: 0.9;
+        }
+      </style>
+      
+      <div class="schedule-timeline fade-in timeline-wrapper">
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+        <!-- Day 1 -->
+        <h3 class="timeline-day-header">DAY 1 (CUMA)</h3>
+        
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🚀</span> Başlangıç ve Tanışma</h4>
+          <span class="timeline-badge">13:00</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">📢</span> Konuşmalar</h4>
+          <span class="timeline-badge">14:30</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">📄</span> Belge Dağıtımı ve Konu Açıklanması</h4>
+          <span class="timeline-badge">15:00</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">⚡</span> Etkinlik Başlama Saati</h4>
+          <span class="timeline-badge">15:30</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Yemek Dağıtımı</h4>
+          <span class="timeline-badge">18:30</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🧠</span> Ödüllü Kahoot</h4>
+          <span class="timeline-badge">19:30</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🍫</span> Atıştırmalık Dağıtımı</h4>
+          <span class="timeline-badge">01:00</span>
+        </div>
+
+        <!-- Day 2 -->
+        <h3 class="timeline-day-header">DAY 2 (CUMARTESİ)</h3>
+        
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">☕</span> Kahvaltı</h4>
+          <span class="timeline-badge">08:00</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🎮</span> Sanal Oyun Turnuvası</h4>
+          <span class="timeline-badge">10:00</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Öğle Yemeği</h4>
+          <span class="timeline-badge">13:00</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🏃‍♂️</span> Fiziksel Oyun Turnuvası</h4>
+          <span class="timeline-badge">16:00</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Akşam Yemeği</h4>
+          <span class="timeline-badge">19:00</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🍫</span> Gece Atıştırmalığı</h4>
+          <span class="timeline-badge">01:00</span>
+        </div>
+
+        <!-- Day 3 -->
+        <h3 class="timeline-day-header">DAY 3 (PAZAR)</h3>
+        
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">☕</span> Kahvaltı</h4>
+          <span class="timeline-badge">08:00</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Öğle Yemeği</h4>
+          <span class="timeline-badge">13:00</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">📊</span> Oyunların Değerlendirilmesi & Etkileşim</h4>
+          <span class="timeline-badge">15:30</span>
+        </div>
+
+        <div class="schedule-item">
+          <h4 class="timeline-title"><span class="cyber-icon">🏆</span> Büyük Ödül Töreni & Kapanış</h4>
+          <span class="timeline-badge">21:00</span>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOKASYON / HARİTA ═══════════════════════════════════════ -->
+  <section id="konum" style="background: var(--bg-primary); padding: var(--space-3xl) 0;">
+    <div class="container">
+      <div class="section-title fade-in" style="text-align: center; margin-bottom: var(--space-2xl);">
+        <h2 style="font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 10px rgba(0, 163, 255, 0.5);">Etkinlik Konumu</h2>
+      </div>
+
+      <div class="location-card fade-in" style="background: rgba(10, 13, 16, 0.95); border: 1px solid var(--mavi-tech); padding: 1px; box-shadow: 0 0 40px rgba(0, 65, 106, 0.3); max-width: 1000px; margin: 0 auto; position: relative;">
+        <!-- Complex Mission Control Frame Accents -->
+        <div style="position: absolute; top: -10px; left: -10px; width: 40px; height: 40px; border-top: 4px solid var(--bordo-elite); border-left: 4px solid var(--bordo-elite); z-index: 5;"></div>
+        <div style="position: absolute; bottom: -10px; right: -10px; width: 40px; height: 40px; border-bottom: 4px solid var(--bordo-elite); border-right: 4px solid var(--bordo-elite); z-index: 5;"></div>
+        <div style="position: absolute; top: -10px; right: -10px; width: 20px; height: 20px; border-top: 2px solid var(--mavi-tech); border-right: 2px solid var(--mavi-tech); z-index: 5;"></div>
+        <div style="position: absolute; bottom: -10px; left: -10px; width: 20px; height: 20px; border-bottom: 2px solid var(--mavi-tech); border-left: 2px solid var(--mavi-tech); z-index: 5;"></div>
+
+        <div style="background: var(--bg-deep); border: 1px solid rgba(255,255,255,0.05); padding: 40px; display: flex; flex-direction: column; gap: 30px; position: relative;">
+          <!-- Scanning line animation -->
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: rgba(0,210,255,0.2); animation: mapScan 10s linear infinite; pointer-events: none; z-index: 10;"></div>
+          
+          <div class="location-info" style="display: flex; align-items: center; gap: 20px; border-bottom: 1px solid rgba(0, 65, 106, 0.3); padding-bottom: 25px;">
+            <div style="flex: 1;">
+              <div style="font-family: 'VT323', monospace; color: var(--mavi-tech); font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 5px;">SYS.LOCATION.TARGET</div>
+              <h3 class="glitch-text" style="margin: 0; color: var(--text-main); font-family: 'Orbitron', sans-serif; font-size: 2.2rem; letter-spacing: 2px; text-shadow: 0 0 15px rgba(0, 65, 106, 0.5);">Akçaabat Kültür Merkezi</h3>
+              <p style="margin: 8px 0 0; color: var(--text-dim); font-family: 'VT323', monospace; font-size: 1.1rem; letter-spacing: 2px; opacity: 0.8;">[MISSION_COORDS]: 41.0185° N, 39.5539° E</p>
+            </div>
+            <div style="text-align: right; border-left: 2px solid var(--bordo-elite); padding-left: 20px;">
+              <div style="font-family: 'VT323', monospace; color: var(--bordo-elite); font-size: 0.9rem; letter-spacing: 2px;">STATUS</div>
+              <div style="color: var(--text-main); font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700;">LOCKED</div>
+            </div>
+          </div>
+
+          <div class="location-map" style="border: 2px solid var(--mavi-tech); background: #000; overflow: hidden; position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,0.8);">
+            <div style="position: absolute; top: 15px; left: 15px; background: rgba(0,65,106,0.8); color: #fff; padding: 5px 15px; font-family: 'VT323', monospace; font-size: 1rem; z-index: 10; border: 1px solid var(--mavi-tech);">MISSION_RADAR_v4.0</div>
+            <iframe 
+              src="https://maps.google.com/maps?q=Akçaabat%20Kültür%20Merkezi&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="500" 
+              style="border: none; filter: invert(90%) hue-rotate(180deg) brightness(0.6) contrast(1.4) saturate(0.5) sepia(0.2);" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <!-- Radar sweep effect overlay -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,65,106,0.1) 100%); pointer-events: none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ SIKÇA SORULAN SORULAR (FAQ) ══════════════════════════════ -->
+  <section id="sss" style="background: var(--bg-surface);">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2 class="glitch-text">Sıkça Sorulan Sorular</h2>
+        <p class="section-subtitle">Merak ettiklerin burada</p>
+      </div>
+
+      <div class="faq-list fade-in">
+        <div class="faq-item">
+          <button class="faq-question" id="faq-1">
+            Game Jam nedir?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Game Jam, belirli bir süre içinde (genellikle 24-72 saat) sıfırdan bir oyun geliştirme etkinliğidir.
+              Katılımcılar bireysel veya takım halinde çalışarak, verilen tema doğrultusunda oyunlarını tasarlar,
+              kodlar ve sunar. Eğlenceli, öğretici ve yaratıcılığı teşvik eden bir deneyimdir!
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" id="faq-2">
+            Kimler katılabilir?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Oyun geliştirmeye ilgi duyan herkes katılabilir! Üniversite öğrencileri, lise öğrencileri,
+              profesyoneller ve hobiciler — deneyim seviyesi fark etmez. Beginner-friendly bir etkinliktir.
+              Programlama, sanat, müzik veya oyun tasarımı alanında katkı sağlayabilirsiniz.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" id="faq-3">
+            Takım nasıl oluşturabilirim?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Kayıt sırasında kendi takımınızla kaydolabilir veya bireysel kayıt yapıp etkinlik günü
+              takım oluşturma oturumunda bir takıma katılabilirsiniz. Takımlar 2-5 kişiden oluşabilir.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" id="faq-4">
+            Hangi araçları kullanabilirim?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              İstediğiniz oyun motorunu, programlama dilini veya aracı kullanabilirsiniz. Unity, Unreal Engine,
+              Godot, GameMaker, Phaser, Construct — hepsi serbest! Kendi bilgisayarınızı getirmeniz gerekir.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" id="faq-5">
+            Etkinlik ücretsiz mi?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Evet! Karadeniz Game Jam 2026 tamamen ücretsizdir. Katılım, yemek, içecek ve
+              workshop'lar dahildir. Tek yapmanız gereken kayıt olmak ve yaratıcılığınızı getirmek!
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" id="faq-6">
+            Ödüller neler?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Kategorilere göre ödüller dağıtılacaktır: En İyi Oyun, En İyi Tasarım, En İyi Sanat,
+              En Yenilikçi Mekanik ve Halk Oylaması. Ödül detayları etkinlik yaklaştıkça duyurulacaktır.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SPONSORLAR ═════════════════════════════════════════════════ -->
+  <section id="sponsorlar" style="background: var(--bg-surface);">
+    <div class="container">
+
+      <% if (mainSponsors.length > 0 || extraSponsors.length > 0) { %>
+
+        <div class="section-title fade-in">
+          <h2 class="glitch-text">Sponsorlarımız</h2>
+          <p class="section-subtitle">Bu etkinliği mümkün kılan değerli destekçilerimiz</p>
+        </div>
+
+        <% if (mainSponsors.length > 0) { %>
+        <!-- Ana Sponsorlar -->
+        <div class="fade-in" style="margin-bottom: var(--space-2xl);">
+          <p class="pixel-font" style="text-align:center; font-size: 1.2rem; letter-spacing: 0.2em; color: var(--mavi-tech); margin-bottom: var(--space-lg); opacity: 0.8;">> PRIMARY_SPONSORS</p>
+          <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            justify-items: center;
+          ">
+            <% mainSponsors.forEach(function(sp) { %>
+              <% const wrapper = sp.website_url ? '<a href="' + sp.website_url + '" target="_blank" rel="noopener">' : '<div>'; %>
+              <% const wrapperClose = sp.website_url ? '</a>' : '</div>'; %>
+              <%- wrapper %>
+                <div style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: var(--space-lg) var(--space-xl);
+                  background: #000;
+                  border: 2px solid var(--bordo-elite);
+                  border-radius: 0;
+                  width: 100%;
+                  min-height: 100px;
+                  transition: all 0.3s;
+                  box-shadow: 4px 4px 0px rgba(176,11,19,0.3);
+                  position: relative;
+                " class="sponsor-card-main">
+                  <!-- Panel Accents -->
+                  <div style="position: absolute; top: -2px; left: -2px; width: 8px; height: 8px; background: var(--mavi-tech);"></div>
+                  <div style="position: absolute; bottom: -2px; right: -2px; width: 8px; height: 8px; background: var(--mavi-tech);"></div>
+                  <img src="<%= sp.logo_url %>" alt="<%= sp.name %>"
+                       style="max-height: 60px; max-width: 160px; object-fit: contain; filter: grayscale(100%) contrast(200%) brightness(1.5);"
+                       title="<%= sp.name %>">
+                </div>
+              <%- wrapperClose %>
+            <% }); %>
+          </div>
+        </div>
+        <% } %>
+
+        <% if (extraSponsors.length > 0) { %>
+        <!-- Ekstra Sponsorlar / Destekçiler -->
+        <div class="fade-in">
+          <p style="text-align:center; font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 0.18em; color: #c87eff; text-transform: uppercase; margin-bottom: var(--space-md); opacity: 0.75;">🔹 Destekçilerimiz</p>
+          <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: var(--space-md);
+            justify-items: center;
+          ">
+            <% extraSponsors.forEach(function(sp) { %>
+              <% const wrapper = sp.website_url ? '<a href="' + sp.website_url + '" target="_blank" rel="noopener">' : '<div>'; %>
+              <% const wrapperClose = sp.website_url ? '</a>' : '</div>'; %>
+              <%- wrapper %>
+                <div style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: var(--space-md);
+                  background: rgba(0,0,0,0.35);
+                  border: 1px solid rgba(180,100,255,0.15);
+                  border-radius: 8px;
+                  width: 100%;
+                  min-height: 70px;
+                  transition: border-color 0.3s, box-shadow 0.3s;
+                " class="sponsor-card-extra">
+                  <img src="<%= sp.logo_url %>" alt="<%= sp.name %>"
+                       style="max-height: 40px; max-width: 110px; object-fit: contain; filter: brightness(0.8) saturate(0.6) grayscale(0.3);"
+                       title="<%= sp.name %>">
+                </div>
+              <%- wrapperClose %>
+            <% }); %>
+          </div>
+        </div>
+        <% } %>
+
+        <div class="text-center fade-in" style="margin-top: var(--space-2xl);">
+          <a href="mailto:gamejam@ktu.edu.tr" class="btn btn-secondary">📧 Sponsor Olmak İstiyorum</a>
+        </div>
+
+      <% } else { %>
+
+        <!-- No sponsors yet — show CTA to become one -->
+        <div class="text-center fade-in">
+          <div class="section-title">
+            <h2>Sponsor Ol</h2>
+            <p class="section-subtitle">Bu etkinliği birlikte mümkün kılalım</p>
+          </div>
+          <p style="margin: 0 auto var(--space-xl); max-width: 550px;">
+            Karadeniz Game Jam 2026'nın sponsoru olarak markana genç, yaratıcı ve teknoloji tutkunu bir kitleye ulaşma fırsatı yakala.
+          </p>
+          <a href="mailto:gamejam@ktu.edu.tr" class="btn btn-secondary btn-lg">📧 Bize Ulaşın</a>
+        </div>
+
+      <% } %>
+
+    </div>
+
+    <style>
+      .sponsor-card-main:hover {
+        border-color: rgba(0, 65, 106, 0.6);
+        box-shadow: 0 0 28px rgba(0, 65, 106, 0.15);
+      }
+      .sponsor-card-main:hover img { filter: brightness(1) saturate(1); }
+      .sponsor-card-extra:hover {
+        border-color: rgba(128, 0, 0, 0.5);
+        box-shadow: 0 0 18px rgba(128, 0, 0, 0.12);
+      }
+      .sponsor-card-extra:hover img { filter: brightness(0.95) saturate(0.9) grayscale(0); }
+      a .sponsor-card-main, a .sponsor-card-extra { cursor: pointer; }
+    </style>
+
+  </section>
+
+  <!-- ═══ CTA BANNER ═══════════════════════════════════════════════ -->
+  <% if (registrationOpen) { %>
+  <section
+    style="background: linear-gradient(135deg, rgba(var(--neon-cyan-rgb), 0.08), rgba(var(--neon-magenta-rgb), 0.08)); border-top: 1px solid var(--border-glow); border-bottom: 1px solid var(--border-glow);">
+    <div class="container text-center fade-in">
+      <h2 style="margin-bottom: var(--space-md);">Yerini Ayırt! 🎮</h2>
+      <p style="margin: 0 auto var(--space-xl); max-width: 500px; text-align: center;">
+        Kontenjan sınırlıdır. Hemen kaydını oluştur ve 48 saatlik maceraya katıl!
+      </p>
+      <a href="/kayit-formu" class="btn btn-primary btn-lg">Kayıt Ol →</a>
+    </div>
+  </section>
+  <% } %>
+
+  <!-- ═══ FOOTER ═══════════════════════════════════════════════════ -->
+  <%- include('../partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+
+</html>
