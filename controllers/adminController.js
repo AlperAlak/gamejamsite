@@ -132,7 +132,8 @@ exports.getDashboard = async (req, res) => {
     const [
       totalParticipants, totalTeams, totalSubmissions,
       pendingParticipants, pendingTeams,
-      approvedParticipants, approvedTeams
+      approvedParticipants, approvedTeams,
+      totalPeople
     ] = await Promise.all([
       Participant.count(),
       Team.count(),
@@ -140,7 +141,8 @@ exports.getDashboard = async (req, res) => {
       Participant.countByStatus('pending'),
       Team.countByStatus('pending'),
       Participant.countByStatus('approved'),
-      Team.countByStatus('approved')
+      Team.countByStatus('approved'),
+      Participant.getTotalPeopleCount()
     ]);
 
     const stats = {
@@ -150,7 +152,8 @@ exports.getDashboard = async (req, res) => {
       pendingParticipants,
       pendingTeams,
       approvedParticipants,
-      approvedTeams
+      approvedTeams,
+      totalPeople
     };
 
     res.render('admin/dashboard', {
