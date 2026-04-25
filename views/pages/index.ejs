@@ -186,67 +186,50 @@
                       text-align: center;
                     }
                   }
+
+                  /* Task 1: Mobile Prize Reordering */
+                  @media (max-width: 768px) {
+                    .prize-grid {
+                      display: flex;
+                      flex-direction: column;
+                      gap: var(--space-xl);
+                    }
+                    .prize-gold { order: 1 !important; transform: scale(1) !important; z-index: 5 !important; }
+                    .prize-silver { order: 2 !important; }
+                    .prize-bronze { order: 3 !important; }
+                    
+                    /* Reset scale for mobile to avoid overlap */
+                    .prize-card {
+                      width: 100% !important;
+                      max-width: 400px;
+                      margin: 0 auto;
+                    }
+                  }
                 </style>
         </div>
       </section>
 
       <!-- ═══ SPONSOR MARQUEE (Above-the-fold) ═════════════════════════ -->
-      <div class="sponsor-marquee-section" id="sponsorlar">
+      <div class="sponsor-marquee-section" id="sponsorlar-marquee">
         <p class="marquee-label">✦ Sponsorlarımız & Destekçilerimiz ✦</p>
         <div class="marquee-track">
-          <!-- Group 1 (original) -->
+          <!-- Group 1 -->
           <div class="marquee-group">
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Alpha</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Beta</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Gamma</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Delta</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Epsilon</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Zeta</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Eta</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Theta</span>
-            </div>
+            <div class="marquee-item"><span class="sponsor-text">◆ OSE</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ Fiuby</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ Star Nirvana</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ Trabzon Büyükşehir Belediyesi</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ KTÜ NextGen</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ OYUN SEKTÖRÜ ETKİNLİKLERİ</span></div>
           </div>
-          <!-- Group 2 (duplicate for seamless loop) -->
+          <!-- Group 2 -->
           <div class="marquee-group">
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Alpha</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Beta</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Gamma</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Delta</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Epsilon</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Zeta</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Eta</span>
-            </div>
-            <div class="marquee-item">
-              <span class="sponsor-text">◆ Sponsor Theta</span>
-            </div>
+            <div class="marquee-item"><span class="sponsor-text">◆ OSE</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ Fiuby</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ Star Nirvana</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ Trabzon Büyükşehir Belediyesi</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ KTÜ NextGen</span></div>
+            <div class="marquee-item"><span class="sponsor-text">◆ OYUN SEKTÖRÜ ETKİNLİKLERİ</span></div>
           </div>
         </div>
       </div>
@@ -751,59 +734,54 @@
             <div class="timeline-line"></div>
             <div class="timeline-content">
               <!-- Day 1 -->
-              <h3 class="timeline-day-header">15 Mayıs 2026 - 1. Gün</h3>
+              <h3 class="timeline-day-header">15 Mayıs - 1. Gün</h3>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🔑</span> Kapı Açılış ve Giriş Kontrol</h4>
-                <span class="timeline-badge">09:30</span>
-              </div>
-
-              <div class="schedule-item" style="border-color: var(--cyan-accent); background: rgba(0, 212, 255, 0.05);">
-                <h4 class="timeline-title"><span class="cyber-icon">📢</span> Açılış Töreni ve TEMA DUYURUSU</h4>
-                <span class="timeline-badge">10:00</span>
+                <h4 class="timeline-title"><span class="cyber-icon">🔑</span> Katılımcıların Etkinliğe Girişleri</h4>
+                <span class="timeline-badge">09:30 - 10:00</span>
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🚀</span> Geliştirme Süreci Başlangıcı</h4>
+                <h4 class="timeline-title"><span class="cyber-icon">📢</span> Başlangıç ve Protokol Konuşmaları</h4>
                 <span class="timeline-badge">10:30</span>
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🤝</span> Tanışma ve Ekip Oluşturma (Opsiyonel)</h4>
-                <span class="timeline-badge">11:00</span>
+                <h4 class="timeline-title"><span class="cyber-icon">ℹ️</span> Etkinlik Hakkında Bilgilendirilme</h4>
+                <span class="timeline-badge">12:00</span>
+              </div>
+
+              <div class="schedule-item" style="border-color: var(--cyan-accent); background: rgba(0, 212, 255, 0.05);">
+                <h4 class="timeline-title"><span class="cyber-icon">🚀</span> Evrak Dağıtımı & Konu Açıklaması</h4>
+                <span class="timeline-badge">12:30</span>
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Öğle Yemeği</h4>
-                <span class="timeline-badge">13:00</span>
-              </div>
-
-              <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">⚡</span> Mentor Destek Seansları</h4>
-                <span class="timeline-badge">15:30</span>
-              </div>
-
-              <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Akşam Yemeği</h4>
+                <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Yemek Dağıtımı</h4>
                 <span class="timeline-badge">18:30</span>
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🧠</span> Ödüllü Kahoot & Mola</h4>
+                <h4 class="timeline-title"><span class="cyber-icon">🧠</span> Ödüllü Kahoot Etkinliği</h4>
                 <span class="timeline-badge">19:30</span>
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🍫</span> Gece Atıştırmalığı</h4>
+                <h4 class="timeline-title"><span class="cyber-icon">☕</span> Serbest Zaman</h4>
+                <span class="timeline-badge">20:00</span>
+              </div>
+
+              <div class="schedule-item">
+                <h4 class="timeline-title"><span class="cyber-icon">🍫</span> Atıştırmalık Dağıtımı</h4>
                 <span class="timeline-badge">01:00</span>
               </div>
 
               <!-- Day 2 -->
-              <h3 class="timeline-day-header">DAY 2 (CUMARTESİ)</h3>
+              <h3 class="timeline-day-header">16 Mayıs - 2. Gün</h3>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">☕</span> Kahvaltı</h4>
-                <span class="timeline-badge">08:00</span>
+                <h4 class="timeline-title"><span class="cyber-icon">🍳</span> Kahvaltı</h4>
+                <span class="timeline-badge">08:00 - 10:00</span>
               </div>
 
               <div class="schedule-item">
@@ -822,37 +800,46 @@
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Akşam Yemeği</h4>
-                <span class="timeline-badge">19:00</span>
+                <h4 class="timeline-title"><span class="cyber-icon">🍱</span> Akşam Yemeği</h4>
+                <span class="timeline-badge">19:00 - 21:00</span>
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🍫</span> Gece Atıştırmalığı</h4>
+                <h4 class="timeline-title"><span class="cyber-icon">🍬</span> Atıştırmalık Dağıtımı</h4>
                 <span class="timeline-badge">01:00</span>
               </div>
 
               <!-- Day 3 -->
-              <h3 class="timeline-day-header">DAY 3 (PAZAR)</h3>
+              <h3 class="timeline-day-header">17 Mayıs - 3. Gün</h3>
 
-              <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">☕</span> Kahvaltı</h4>
-                <span class="timeline-badge">08:00</span>
+              <div class="schedule-item" style="border-color: var(--magenta-accent); background: rgba(255, 45, 111, 0.05);">
+                <h4 class="timeline-title"><span class="cyber-icon">⌛</span> Son Teslim</h4>
+                <span class="timeline-badge">12:30</span>
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Öğle Yemeği</h4>
+                <h4 class="timeline-title"><span class="cyber-icon">🎤</span> Sunum Başlangıcı</h4>
                 <span class="timeline-badge">13:00</span>
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">📊</span> Oyunların Değerlendirilmesi & Etkileşim
-                </h4>
+                <h4 class="timeline-title"><span class="cyber-icon">🍽️</span> Öğle Yemeği</h4>
+                <span class="timeline-badge">13:00 - 15:00</span>
+              </div>
+
+              <div class="schedule-item">
+                <h4 class="timeline-title"><span class="cyber-icon">💤</span> Hakemlerin Dinlenmesi & Sunum Bitişi</h4>
+                <span class="timeline-badge">15:00</span>
+              </div>
+
+              <div class="schedule-item">
+                <h4 class="timeline-title"><span class="cyber-icon">📊</span> Oyunların Değerlendirilmesi</h4>
                 <span class="timeline-badge">15:30</span>
               </div>
 
               <div class="schedule-item">
-                <h4 class="timeline-title"><span class="cyber-icon">🏆</span> Büyük Ödül Töreni & Kapanış</h4>
-                <span class="timeline-badge">21:00</span>
+                <h4 class="timeline-title"><span class="cyber-icon">🏆</span> Büyük Ödül Töreni</h4>
+                <span class="timeline-badge">16:00</span>
               </div>
             </div>
           </div>
@@ -1029,123 +1016,103 @@
       </section>
 
       <!-- ═══ SPONSORLAR ═════════════════════════════════════════════════ -->
-      <section id="sponsorlar" style="background: var(--bg-surface);">
+      <section id="sponsorlar" style="background: var(--bg-surface); border-top: 1px solid var(--border-glow);">
         <div class="container">
 
-          <% if (mainSponsors.length> 0 || extraSponsors.length > 0) { %>
+          <!-- Real Sponsors: Katkı Sponsorları -->
+          <div class="section-title fade-in">
+            <h2 class="glitch-text">Katkı Sponsorları</h2>
+            <p class="section-subtitle">Bu etkinliğe değer katan değerli destekçilerimiz</p>
+          </div>
 
-            <div class="section-title fade-in">
-              <h2 class="glitch-text">Sponsorlarımız</h2>
-              <p class="section-subtitle">Bu etkinliği mümkün kılan değerli destekçilerimiz</p>
+          <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-xl);
+            justify-items: center;
+            margin-bottom: var(--space-3xl);
+          " class="fade-in">
+            <!-- OSE -->
+            <div class="sponsor-card-v2">
+              <img src="/images/sponsors/ose-logo.png" alt="OSE (Oyun Sektörü Etkinlikleri)">
+              <div class="sponsor-name">OSE</div>
             </div>
+            <!-- Fiuby -->
+            <div class="sponsor-card-v2">
+              <img src="/images/sponsors/fiuby-logo.png" alt="Fiuby">
+              <div class="sponsor-name">Fiuby</div>
+            </div>
+            <!-- Star Nirvana -->
+            <div class="sponsor-card-v2">
+              <img src="/images/sponsors/star-nirvana-logo.png" alt="Star Nirvana Cafe & Restaurant">
+              <div class="sponsor-name">Star Nirvana</div>
+            </div>
+            <!-- TBB -->
+            <div class="sponsor-card-v2">
+              <img src="/images/sponsors/tbb-logo.png" alt="Trabzon Büyükşehir Belediyesi">
+              <div class="sponsor-name">Trabzon B. Belediyesi</div>
+            </div>
+          </div>
 
-            <% if (mainSponsors.length> 0) { %>
-              <!-- Ana Sponsorlar -->
-              <div class="fade-in" style="margin-bottom: var(--space-2xl);">
-                <p class="pixel-font"
-                  style="text-align:center; font-size: 1.2rem; letter-spacing: 0.2em; color: var(--mavi-tech); margin-bottom: var(--space-lg); opacity: 0.8;">
-                  > PRIMARY_SPONSORS</p>
-                <div style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-lg);
-            justify-items: center;
-          ">
-                  <% mainSponsors.forEach(function(sp) { %>
-                    <% const wrapper=sp.website_url ? '<a href="' + sp.website_url + '" target="_blank" rel="noopener">'
-                      : '<div>' ; %>
-                      <% const wrapperClose=sp.website_url ? '</a>' : '</div>' ; %>
-                        <%- wrapper %>
-                          <div style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  padding: var(--space-lg) var(--space-xl);
-                  background: #000;
-                  border: 2px solid var(--bordo-elite);
-                  border-radius: 0;
-                  width: 100%;
-                  min-height: 100px;
-                  transition: all 0.3s;
-                  box-shadow: 4px 4px 0px rgba(176,11,19,0.3);
-                  position: relative;
-                " class="sponsor-card-main">
-                            <!-- Panel Accents -->
-                            <div
-                              style="position: absolute; top: -2px; left: -2px; width: 8px; height: 8px; background: var(--mavi-tech);">
-                            </div>
-                            <div
-                              style="position: absolute; bottom: -2px; right: -2px; width: 8px; height: 8px; background: var(--mavi-tech);">
-                            </div>
-                            <img src="<%= sp.logo_url %>" alt="<%= sp.name %>"
-                              style="max-height: 60px; max-width: 160px; object-fit: contain; filter: grayscale(100%) contrast(200%) brightness(1.5);"
-                              title="<%= sp.name %>">
-                          </div>
-                          <%- wrapperClose %>
-                            <% }); %>
-                </div>
-              </div>
-              <% } %>
+          <style>
+            .sponsor-card-v2 {
+              background: rgba(0,0,0,0.4);
+              border: 1px solid rgba(var(--neon-cyan-rgb), 0.2);
+              padding: var(--space-lg);
+              width: 100%;
+              max-width: 240px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 15px;
+              transition: all 0.3s ease;
+              position: relative;
+              overflow: hidden;
+            }
+            .sponsor-card-v2::before {
+              content: '';
+              position: absolute;
+              top: 0; left: 0; width: 4px; height: 100%;
+              background: var(--neon-cyan);
+              opacity: 0.3;
+            }
+            .sponsor-card-v2:hover {
+              transform: translateY(-5px);
+              border-color: var(--neon-cyan);
+              box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+              background: rgba(0,0,0,0.6);
+            }
+            .sponsor-card-v2 img {
+              max-height: 80px;
+              max-width: 100%;
+              object-fit: contain;
+              filter: grayscale(100%) brightness(1.2);
+              transition: all 0.3s ease;
+            }
+            .sponsor-card-v2:hover img {
+              filter: grayscale(0%) brightness(1);
+            }
+            .sponsor-name {
+              font-family: var(--font-display);
+              font-size: 0.8rem;
+              color: var(--text-muted);
+              text-align: center;
+              letter-spacing: 1px;
+            }
+          </style>
 
-                <% if (extraSponsors.length> 0) { %>
-                  <!-- Ekstra Sponsorlar / Destekçiler -->
-                  <div class="fade-in">
-                    <p
-                      style="text-align:center; font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 0.18em; color: #c87eff; text-transform: uppercase; margin-bottom: var(--space-md); opacity: 0.75;">
-                      🔹 Destekçilerimiz</p>
-                    <div style="
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: var(--space-md);
-            justify-items: center;
-          ">
-                      <% extraSponsors.forEach(function(sp) { %>
-                        <% const wrapper=sp.website_url ? '<a href="' + sp.website_url
-                          + '" target="_blank" rel="noopener">' : '<div>' ; %>
-                          <% const wrapperClose=sp.website_url ? '</a>' : '</div>' ; %>
-                            <%- wrapper %>
-                              <div style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  padding: var(--space-md);
-                  background: rgba(0,0,0,0.35);
-                  border: 1px solid rgba(180,100,255,0.15);
-                  border-radius: 8px;
-                  width: 100%;
-                  min-height: 70px;
-                  transition: border-color 0.3s, box-shadow 0.3s;
-                " class="sponsor-card-extra">
-                                <img src="<%= sp.logo_url %>" alt="<%= sp.name %>"
-                                  style="max-height: 40px; max-width: 110px; object-fit: contain; filter: brightness(0.8) saturate(0.6) grayscale(0.3);"
-                                  title="<%= sp.name %>">
-                              </div>
-                              <%- wrapperClose %>
-                                <% }); %>
-                    </div>
-                  </div>
-                  <% } %>
+          <% if (mainSponsors.length> 0 || extraSponsors.length > 0) { %>
+            <div class="section-title fade-in" style="margin-top: var(--space-3xl);">
+              <h2 style="font-size: 1.5rem; opacity: 0.6;">Diğer Destekçiler</h2>
+            </div>
+            ... (EJS Grid for Dynamic Sponsors) ...
+          <% } %>
 
-                    <div class="text-center fade-in" style="margin-top: var(--space-2xl);">
-                      <a href="mailto:ktuofoyungelistirme@gmail.com" class="btn btn-secondary">📧 Sponsor Olmak İstiyorum</a>
-                    </div>
-
-                    <% } else { %>
-
-                      <!-- No sponsors yet — show CTA to become one -->
-                      <div class="text-center fade-in">
-                        <div class="section-title">
-                          <h2>Sponsor Ol</h2>
-                          <p class="section-subtitle">Bu etkinliği birlikte mümkün kılalım</p>
-                        </div>
-                        <p style="margin: 0 auto var(--space-xl); max-width: 550px;">
-                          Karadeniz Game Jam 2026'nın sponsoru olarak markana genç, yaratıcı ve teknoloji tutkunu bir
-                          kitleye ulaşma fırsatı yakala.
-                        </p>
-                        <a href="mailto:ktuofoyungelistirme@gmail.com" class="btn btn-secondary btn-lg">📧 Bize Ulaşın</a>
-                      </div>
-
-                      <% } %>
+          <div class="text-center fade-in" style="margin-top: var(--space-2xl);">
+            <a href="mailto:ktuofoyungelistirme@gmail.com" class="btn btn-secondary">📧 Sponsor Olmak İstiyorum</a>
+          </div>
+        </div>
+      </section>
 
         </div>
 
