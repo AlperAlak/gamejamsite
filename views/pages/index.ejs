@@ -20,7 +20,7 @@
             <div class="hero-meta">
               <div class="meta-chip">
                 <span class="chip-icon">📍</span>
-                <span class="chip-text">Akçaabat Kültür Merkezi</span>
+                <span class="chip-text">Çarşıbaşı Meslek Yüksekokulu</span>
               </div>
               <div class="meta-chip chip-magenta">
                 <span class="chip-icon">📅</span>
@@ -348,10 +348,113 @@
             <div class="theme-teaser-body">
               <p class="theme-teaser-label">Tema Açılış Tarihine Kadar Kilitli</p>
 
-              <!-- The scrambling text display -->
-              <div class="theme-encrypted-display" id="theme-display" data-text="@#$%&*!?">
-                ██ ŞİFRELENDİ ██
+              <!-- Digital Countdown Timer -->
+              <div class="theme-countdown-container" id="theme-countdown">
+                <div class="theme-countdown-item">
+                  <span class="theme-countdown-value" id="t-days">00</span>
+                  <span class="theme-countdown-label">GÜN</span>
+                </div>
+                <span class="theme-countdown-separator">:</span>
+                <div class="theme-countdown-item">
+                  <span class="theme-countdown-value" id="t-hours">00</span>
+                  <span class="theme-countdown-label">SAAT</span>
+                </div>
+                <span class="theme-countdown-separator">:</span>
+                <div class="theme-countdown-item">
+                  <span class="theme-countdown-value" id="t-mins">00</span>
+                  <span class="theme-countdown-label">DAKİKA</span>
+                </div>
+                <span class="theme-countdown-separator">:</span>
+                <div class="theme-countdown-item">
+                  <span class="theme-countdown-value" id="t-secs">00</span>
+                  <span class="theme-countdown-label">SANİYE</span>
+                </div>
               </div>
+
+              <style>
+                .theme-countdown-container {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 1.5rem;
+                  font-family: 'Share Tech Mono', monospace;
+                  color: var(--cyan-accent);
+                  margin: 2.5rem 0;
+                  text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+                }
+                .theme-countdown-item {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  min-width: 80px;
+                }
+                .theme-countdown-value {
+                  font-size: clamp(2.5rem, 6vw, 4rem);
+                  font-weight: 700;
+                  line-height: 1;
+                  letter-spacing: 2px;
+                }
+                .theme-countdown-label {
+                  font-size: 0.7rem;
+                  color: var(--text-muted);
+                  margin-top: 0.8rem;
+                  letter-spacing: 3px;
+                  font-weight: 600;
+                }
+                .theme-countdown-separator {
+                  font-size: 2.5rem;
+                  margin-top: -1.5rem;
+                  opacity: 0.4;
+                  color: var(--text-muted);
+                }
+                @media (max-width: 768px) {
+                  .theme-countdown-container { gap: 0.8rem; margin: 1.5rem 0; }
+                  .theme-countdown-item { min-width: 60px; }
+                  .theme-countdown-value { font-size: 1.8rem; }
+                  .theme-countdown-separator { font-size: 1.2rem; margin-top: -0.8rem; }
+                  .theme-countdown-label { font-size: 0.6rem; letter-spacing: 1px; }
+                }
+              </style>
+
+              <script>
+                function initThemeCountdown() {
+                  const target = new Date('2026-05-15T10:00:00+03:00').getTime();
+                  const daysEl = document.getElementById('t-days');
+                  const hoursEl = document.getElementById('t-hours');
+                  const minutesEl = document.getElementById('t-mins');
+                  const secondsEl = document.getElementById('t-secs');
+
+                  if (!daysEl) return;
+
+                  function update() {
+                    const now = new Date().getTime();
+                    const diff = target - now;
+
+                    if (diff <= 0) {
+                      if (daysEl) daysEl.textContent = '00';
+                      if (hoursEl) hoursEl.textContent = '00';
+                      if (minutesEl) minutesEl.textContent = '00';
+                      if (secondsEl) secondsEl.textContent = '00';
+                      clearInterval(timer);
+                      return;
+                    }
+
+                    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    if (daysEl) daysEl.textContent = String(d).padStart(2, '0');
+                    if (hoursEl) hoursEl.textContent = String(h).padStart(2, '0');
+                    if (minutesEl) minutesEl.textContent = String(m).padStart(2, '0');
+                    if (secondsEl) secondsEl.textContent = String(s).padStart(2, '0');
+                  }
+
+                  const timer = setInterval(update, 1000);
+                  update();
+                }
+                document.addEventListener('DOMContentLoaded', initThemeCountdown);
+              </script>
 
               <!-- Fake decryption progress bar -->
               <div class="theme-progress-bar">
@@ -794,10 +897,10 @@
                     SYS.LOCATION.TARGET</div>
                   <h3 class="glitch-text"
                     style="margin: 0; color: var(--text-main); font-family: 'Orbitron', sans-serif; font-size: 2.2rem; letter-spacing: 2px; text-shadow: 0 0 15px rgba(0, 65, 106, 0.5);">
-                    Akçaabat Kültür Merkezi</h3>
+                    Çarşıbaşı Meslek Yüksekokulu</h3>
                   <p
                     style="margin: 8px 0 0; color: var(--text-dim); font-family: 'VT323', monospace; font-size: 1.1rem; letter-spacing: 2px; opacity: 0.8;">
-                    [MISSION_COORDS]: 41.0185° N, 39.5539° E</p>
+                    [MISSION_COORDS]: 41.0772° N, 39.4181° E</p>
                 </div>
                 <div style="text-align: right; border-left: 2px solid var(--bordo-elite); padding-left: 20px;">
                   <div
@@ -815,7 +918,7 @@
                   style="position: absolute; top: 15px; left: 15px; background: rgba(0,65,106,0.8); color: #fff; padding: 5px 15px; font-family: 'VT323', monospace; font-size: 1rem; z-index: 10; border: 1px solid var(--mavi-tech);">
                   MISSION_RADAR_v4.0</div>
                 <iframe
-                  src="https://maps.google.com/maps?q=Akçaabat%20Kültür%20Merkezi&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  src="https://maps.google.com/maps?q=Çarşıbaşı%20Meslek%20Yüksekokulu,%20Trabzon&t=&z=16&ie=UTF8&iwloc=&output=embed"
                   width="100%" height="500"
                   style="border: none; filter: invert(90%) hue-rotate(180deg) brightness(0.6) contrast(1.4) saturate(0.5) sepia(0.2);"
                   allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
